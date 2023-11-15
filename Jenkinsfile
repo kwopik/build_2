@@ -6,10 +6,17 @@ pipeline {
   triggers { pollSCM('* * * * *') }
     stages {
 
-         stage ('check and delete old build_app1') {
+         stage ('check and stop old build_app1') {
             steps {
                 echo "=============check and delete old build_app1=============="
-                sh 'docker ps -q -f name=build_app1 && docker kill build_app1 && docker rm build_app1 || echo "Контейнер build_app1 не найден или не запущен."'
+                sh 'docker ps -q -f name=build_app1 && docker kill build_app1 || echo "Контейнер build_app1 не найден или не запущен."'
+            }
+        } 
+
+           stage ('check and delete old container build_app1') {
+            steps {
+                echo "=============check and delete old container build_app1=============="
+                sh 'docker ps -a -q -f name=build_app1 && docker rm build_app1 || echo "Контейнер build_app1 не найден или удален."'
             }
         } 
         stage ('docker build') {
