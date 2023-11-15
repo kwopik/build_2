@@ -63,6 +63,20 @@ pipeline {
                 sh 'docker rm simple-go-1'
             }
         } 
+
+          stage ('docker build app') {
+            steps {
+                echo "=============docker build app=============="
+                sh 'docker build -t build-app:latest -f Dockerfile_build .'
+            }
+        } 
+
+            stage ('docker run app') {
+            steps {
+                echo "=============docker build app=============="
+                sh 'docker run -d --name build_app1 -p 8085:8080 build-app:latest'
+            }
+        } 
     }
 
 
