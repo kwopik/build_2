@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo "=============run=============="
                 
-                   sh 'docker run -d --name simple-go-2 -p 8081:8080 simple-go-app2 '
+                   sh 'docker run -d --name simple-go-2 -p 8082:8080 simple-go-app2 '
                 
             }
         }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo "=============test=============="
                 script {
-                   def curlResult = sh(script: 'curl -I http://127.0.0.1:8081', returnStatus: true)
+                   def curlResult = sh(script: 'curl -I http://127.0.0.1:8082', returnStatus: true)
                     echo "curl Result: ${curlResult}"
                 echo "!!!!!!!!!!!!!success!!!!!!!!!!!!!!!!"
                 }
