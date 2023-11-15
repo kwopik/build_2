@@ -81,7 +81,7 @@ pipeline {
         stage ('copy arhiv') {
             steps {
                 echo "=============copy arhiv=============="
-                sh 'docker save -o /home/slavik/file/build-app-archive.tar build-app:latest'
+                sh '[ -e "/home/slavik/file/build-app-archive.tar" ] && echo "Файл build-app-archive.tar уже существует." || docker save -o /home/slavik/file/build-app-archive.tar build-app:latest'
             }
         } 
 
