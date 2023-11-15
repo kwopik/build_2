@@ -3,20 +3,20 @@ pipeline {
     agent {
         label 'master'
     }
-  triggers { pollSCM('* * * * *') }
+ // triggers { pollSCM('* * * * *') }
     stages {
 
          stage ('check and delete old build_app1') {
             steps {
-                echo "=============check and delete old build_app1=============="
-                sh 'docker ps -q -f name=build_app1 && docker kill build_app1 && docker rm build_app1 || echo "Контейнер build_app1 не найден или не запущен."'
+                echo "=============check and delete old build_app2=============="
+                sh 'docker ps -q -f name=build_app2 && docker kill build_app1 && docker rm build_app2 || echo "Контейнер build_app2 не найден или не запущен."'
             }
         } 
         stage ('docker build') {
             steps {
                 echo "=============build=============="
                 
-                   sh 'docker build -t simple-go-app:latest .'
+                   sh 'docker build -t simple-go-app2:latest .'
                 
             }
         }   
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo "=============run=============="
                 
-                   sh 'docker run -d --name simple-go-1 -p 8081:8080 simple-go-app '
+                   sh 'docker run -d --name simple-go-2 -p 8081:8080 simple-go-app2 '
                 
             }
         }
@@ -42,7 +42,7 @@ pipeline {
       stage ('copy my app') {
             steps {
                 echo "=============copy my app=============="
-                sh 'docker cp simple-go-1:/app/myapp .'
+                sh 'docker cp simple-go-2:/app/myapp .'
             }
         }     
   /*        stage ('check file') {
@@ -61,34 +61,34 @@ pipeline {
                          stage ('docker kill') {
             steps {
                 echo "=============kill=============="
-                sh 'docker kill simple-go-1'
+                sh 'docker kill simple-go-2'
             }
         } 
         stage ('docker delete') {
             steps {
                 echo "=============docker delete=============="
-                sh 'docker rm simple-go-1'
+                sh 'docker rm simple-go-2'
             }
         } 
 
           stage ('docker build app') {
             steps {
                 echo "=============docker build app=============="
-                sh 'docker build -t build-app:latest -f Dockerfile_build .'
+                sh 'docker build -t build-app2:latest -f Dockerfile_build .'
             }
         } 
         
         stage ('copy arhiv') {
             steps {
                 echo "=============copy arhiv=============="
-                sh '[ -e "/home/slavik/file/build-app-archive.tar" ] && echo "Файл build-app-archive.tar уже существует." || docker save -o /home/slavik/file/build-app-archive.tar build-app:latest'
+                sh '[ -e "/home/slavik/file/build-app-archive2.tar" ] && echo "Файл build-app-archive2.tar уже существует." || docker save -o /home/slavik/file/build-app-archive2.tar build-app2:latest'
             }
         } 
 
             stage ('docker run app') {
             steps {
                 echo "=============docker run app=============="
-                sh 'docker run -d --name build_app1 -p 8085:8080 build-app:latest'
+                sh 'docker run -d --name build_app2 -p 8086:8080 build-app:latest'
             }
         } 
     }
