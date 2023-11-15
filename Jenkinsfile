@@ -3,7 +3,7 @@ pipeline {
     agent {
         label 'master'
     }
-//  triggers { pollSCM('* * * * *') }
+  triggers { pollSCM('* * * * *') }
     stages {
 
          stage ('check and delete old build_app1') {
