@@ -70,6 +70,13 @@ pipeline {
                 sh 'docker build -t build-app:latest -f Dockerfile_build .'
             }
         } 
+        
+        stage ('copy arhiv') {
+            steps {
+                echo "=============copy arhiv=============="
+                sh 'docker save -o /home/slavik/file/build-app-archive.tar build-app:latest'
+            }
+        } 
 
             stage ('docker run app') {
             steps {
