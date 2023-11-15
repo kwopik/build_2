@@ -31,13 +31,27 @@ pipeline {
                 }
             }
         }
-/*                 stage ('docker kill') {
+ 
+      stage ('copy my app') {
+            steps {
+                echo "=============copy my app=============="
+                sh 'docker cp simple-go-1:/app/myapp .'
+            }
+        }     
+          stage ('copy my app') {
+            steps {
+                echo "=============copy my app=============="
+                sh 'if [ -e "." ]; then echo "Успех"; else echo "Файл не найден"; fi'
+            }
+        } 
+                         stage ('docker kill') {
             steps {
                 echo "=============kill=============="
-                sh 'docker kill flasktest'
+                sh 'docker kill simple-go-1'
             }
-        } */
+        } 
     }
+
 
  
 }
