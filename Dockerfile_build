@@ -2,7 +2,7 @@ FROM golang:latest
 
 WORKDIR /app
 
-COPY home/slavik/file/myapp .
+COPY myapp .
 
 EXPOSE 8085
 
