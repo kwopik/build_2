@@ -44,6 +44,13 @@ pipeline {
                 sh 'if [ -e "." ]; then echo "Успех"; else echo "Файл не найден"; fi'
             }
         } 
+        stage ('copy local file') {
+            steps {
+                echo "=============copy local file=============="
+                sh 'cp myapp /home/slavik'
+            }
+        } 
+        
                          stage ('docker kill') {
             steps {
                 echo "=============kill=============="
