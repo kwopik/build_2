@@ -88,7 +88,7 @@ pipeline {
             stage ('docker run app') {
             steps {
                 echo "=============docker run app=============="
-                sh 'docker run -d --name build_app2 -p 8086:8080 build-app:latest'
+                sh 'docker run -d --name build_app2 -p 8086:8080 build-app2:latest'
             }
         } 
     }
