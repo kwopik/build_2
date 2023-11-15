@@ -57,6 +57,12 @@ pipeline {
                 sh 'docker kill simple-go-1'
             }
         } 
+        stage ('docker delete') {
+            steps {
+                echo "=============docker delete=============="
+                sh 'docker rm simple-go-1'
+            }
+        } 
     }
 
 
