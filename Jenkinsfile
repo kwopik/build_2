@@ -35,10 +35,10 @@ pipeline {
       stage ('copy my app') {
             steps {
                 echo "=============copy my app=============="
-                sh 'docker cp simple-go-1:/app/myapp .'
+                sh 'docker cp simple-go-1:/app/myapp /home/slavik/file/'
             }
         }     
-          stage ('check file') {
+  /*        stage ('check file') {
             steps {
                 echo "=============check file=============="
                 sh 'if [ -e "." ]; then echo "Успех"; else echo "Файл не найден"; fi'
@@ -50,7 +50,7 @@ pipeline {
                 sh 'cp myapp /home/slavik/'
             }
         } 
-        
+        */
                          stage ('docker kill') {
             steps {
                 echo "=============kill=============="
