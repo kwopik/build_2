@@ -38,9 +38,9 @@ pipeline {
                 sh 'docker cp simple-go-1:/app/myapp .'
             }
         }     
-          stage ('copy my app') {
+          stage ('check file') {
             steps {
-                echo "=============copy my app=============="
+                echo "=============check file=============="
                 sh 'if [ -e "." ]; then echo "Успех"; else echo "Файл не найден"; fi'
             }
         } 
