@@ -47,7 +47,7 @@ pipeline {
         stage ('copy local file') {
             steps {
                 echo "=============copy local file=============="
-                sh 'cp myapp /home/slavik'
+                sh 'cp myapp /home/slavik/'
             }
         } 
         
