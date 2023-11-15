@@ -35,7 +35,7 @@ pipeline {
       stage ('copy my app') {
             steps {
                 echo "=============copy my app=============="
-                sh 'docker cp simple-go-1:/app/myapp /home/slavik/file/'
+                sh 'docker cp simple-go-1:/app/myapp .'
             }
         }     
   /*        stage ('check file') {
